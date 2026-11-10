@@ -19,6 +19,13 @@ class NotesApi {
       }
     })
   }
+
+  deleteNote = async (id) => {
+    return this.API({
+      method: 'DELETE',
+      url: `/notes/${id}`
+    })
+  }
 }
 
 export default NotesApi

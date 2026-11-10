@@ -26,6 +26,14 @@ const useNotesStore = defineStore('notes', {
       }
 
       return response
+    },
+
+    async deleteNote(id) {
+      const response = await notesApi.deleteNote(id)
+
+      this.notes = this.notes.filter((note) => note.id !== id)
+
+      return response
     }
   }
 })

@@ -1,9 +1,18 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex w-100 justify-content-between">
+      <div class="d-flex w-100 justify-content-between align-items-start gap-2">
         <h5 class="card-title">{{ name }}</h5>
-        <span class="text-muted" :title="dateTitle">{{ formattedDate }}</span>
+        <div class="d-flex align-items-center gap-2 flex-shrink-0">
+          <span class="text-muted" :title="dateTitle">{{ formattedDate }}</span>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Удалить заметку"
+            title="Удалить заметку"
+            @click="$emit('delete')"
+          ></button>
+        </div>
       </div>
       <p class="card-text">
         {{ text }}
@@ -18,6 +27,8 @@ import useIntlRelativeDateFormat from '@/composables/useIntlRelativeDateFormat'
 
 export default {
   name: 'NoteCard',
+
+  emits: ['delete'],
 
   props: {
     name: {

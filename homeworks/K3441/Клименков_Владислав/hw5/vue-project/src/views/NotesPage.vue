@@ -36,6 +36,7 @@
           :name="note.name"
           :text="note.text"
           :created-at="note.createdAt"
+          @delete="deleteCard(note.id)"
         />
       </div>
     </div>
@@ -76,7 +77,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useNotesStore, ['loadNotes', 'createNote']),
+    ...mapActions(useNotesStore, ['loadNotes', 'createNote', 'deleteNote']),
 
     async createCard() {
       const name = this.form.name.trim()
@@ -97,6 +98,14 @@ export default {
         this.resetForm()
       } catch (error) {
         console.error('Не удалось создать заметку:', error)
+      }
+    },
+
+    async deleteCard(id) {
+      try {
+        await this.deleteNote(id)
+      } catch (error) {
+        console.error('Не удалось удалить заметку:', error)
       }
     },
 
